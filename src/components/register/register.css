@@ -1,0 +1,11 @@
+.changerSpan {
+  background-color: rgb(14, 146, 14);
+  width: 20%;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  padding: 10px;
+  margin-top: 3em;
+  border-radius: 10px;
+  cursor: pointer;
+}
