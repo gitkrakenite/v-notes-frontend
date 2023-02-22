@@ -5,9 +5,8 @@ import { BsSearch } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
-const { user } = useSelector((state) => state.auth);
-
 const Landing = () => {
+  const { user } = useSelector((state) => state.auth);
   return (
     <div className="pt-[20px]">
       <div className="w-[90%] m-auto">

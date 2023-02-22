@@ -1,10 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
 import authReducer from "../features/auth/authSlice";
-// import reportReducer from "../features/reports/reportSlice";
+import todoReducer from "../features/todo/todoSlice";
 
 export const store = configureStore({
   reducer: {
     auth: authReducer,
-    // reports: reportReducer,
+    todo: todoReducer,
   },
 });
