@@ -1,10 +1,51 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./login.css";
+
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { login, reset } from "../../features/auth/authSlice";
+import Spinner from "../Spinner";
 
 const Login = () => {
   const [name, setName] = useState("");
-
   const [password, setPassword] = useState("");
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const { user, isLoading, isError, isSuccess, message } = useSelector(
+    (state) => state.auth
+  );
+
+  useEffect(() => {
+    if (isError) {
+      toast.error("Something went wrong", { theme: "dark" });
+    }
+
+    if (isSuccess || user) {
+      toast.success("Successful sign in", { theme: "dark" });
+      navigate("/notes");
+    }
+
+    dispatch(reset());
+  }, [user, isError, isSuccess, message, navigate, dispatch]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (!name || !password) {
+      toast.error("Fill all details", { theme: "dark" });
+      return;
+    } else {
+      try {
+        const userData = { name, password };
+        dispatch(login(userData));
+      } catch (error) {
+        toast.error("Invalid credentials", { theme: "dark" });
+      }
+    }
+  };
 
   return (
     <div>
@@ -30,12 +71,17 @@ const Login = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
 
-            <button
-              type="submit"
-              className="bg-green-600 p-[10px] rounded-md text-zinc-50 text-lg"
-            >
-              Login Now
-            </button>
+            {isLoading ? (
+              <Spinner message="Signing in ..." />
+            ) : (
+              <button
+                type="submit"
+                className="bg-green-600 p-[10px] rounded-md text-zinc-50 text-lg"
+                onClick={handleSubmit}
+              >
+                Sign in Now
+              </button>
+            )}
           </form>
           {/* terms */}
           <div className="pt-[1em] pl-[1em]">

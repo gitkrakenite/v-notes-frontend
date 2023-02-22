@@ -2,6 +2,10 @@ import React from "react";
 import heroImg from "../../assets/heroImg.jpg";
 import { AiOutlineBulb, AiOutlineCoffee } from "react-icons/ai";
 import { BsSearch } from "react-icons/bs";
+import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+
+const { user } = useSelector((state) => state.auth);
 
 const Landing = () => {
   return (
@@ -61,22 +65,40 @@ const Landing = () => {
             </div>
 
             <div className="text-zinc-500 mb-[3em]">
-              <p>This is the absolute way to make your notes</p>
+              <p>This is the absolute way to make your todos</p>
               <p>easier and save the earth as well.</p>
               <p>Anything will be better</p>
             </div>
 
-            <div className="cursor-pointer mb-[2em]">
-              <span
-                className="rounded-md bg-green-500 text-zinc-50"
-                style={{
-                  padding: "15px 45px",
-                  fontWeight: "600",
-                }}
-              >
-                Get Started
-              </span>
-            </div>
+            {user ? (
+              <Link to="/notes">
+                <div className="cursor-pointer mb-[2em]">
+                  <span
+                    className="rounded-md bg-green-500 text-zinc-50"
+                    style={{
+                      padding: "15px 45px",
+                      fontWeight: "600",
+                    }}
+                  >
+                    Continue
+                  </span>
+                </div>
+              </Link>
+            ) : (
+              <Link to="/auth">
+                <div className="cursor-pointer mb-[2em]">
+                  <span
+                    className="rounded-md bg-green-500 text-zinc-50"
+                    style={{
+                      padding: "15px 45px",
+                      fontWeight: "600",
+                    }}
+                  >
+                    Get Started
+                  </span>
+                </div>
+              </Link>
+            )}
 
             <div>
               <p className="text-zinc-700">Trusted by</p>

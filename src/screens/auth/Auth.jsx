@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Login from "../../components/login/Login";
 import Register from "../../components/register/Register";
+import { Link } from "react-router-dom";
 
 const Auth = () => {
   const [change, setChange] = useState(false);
@@ -11,14 +12,16 @@ const Auth = () => {
   return (
     <div>
       {/* logo */}
-      <div className="pt-[15px] pl-[15px]">
-        <h1 className="text-black font-bold text-2xl">
-          V-NO
-          <span className="bg-green-400 pt-[5px] pb-[5px] pr-[5px] rounded-tr-lg rounded-bl-lg">
-            TED
-          </span>
-        </h1>
-      </div>
+      <Link to="/">
+        <div className="pt-[15px] pl-[15px]">
+          <h1 className="text-black font-bold text-2xl">
+            V-NO
+            <span className="bg-green-400 pt-[5px] pb-[5px] pr-[5px] rounded-tr-lg rounded-bl-lg">
+              TED
+            </span>
+          </h1>
+        </div>
+      </Link>
 
       <div>{change ? <Login /> : <Register />}</div>
       {/*  */}
